@@ -1,0 +1,623 @@
+alter table nama table renamo to nama table baru
+mysql> alter table mhs
+    -> add alamat
+    -> varchar(50);
+Query OK, 4 rows affected (0.22 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc mhs;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| nim    | int(12)     | NO   |     | NULL    |       |
+| nama   | varchar(50) | NO   |     | NULL    |       |
+| alamat | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.05 sec)
+
+mysql> alter table mahasiswa rename to mhs;
+
+mysql> alter table mhs drop alamat;
+Query OK, 4 rows affected (0.11 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc mhs;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| nim   | int(12)     | NO   |     | NULL    |       |
+| nama  | varchar(50) | NO   |     | NULL    |       |
+| hobby | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+
+UPDATE  `tif_pagi_a`.`mhs` 
+SET  `hobby` =  'makan' 
+WHERE  `mhs`.`nim` =2016230028 
+AND  `mhs`.`nama` =  'ANGGINI EKA PUTRI' 
+AND  `mhs`.`hobby` IS NULL LIMIT 1 ;
+
+mysql> alter table mhs modify nim int(12)primary key;
+Query OK, 4 rows affected (0.14 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc mhs;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| nim   | int(12)     | NO   | PRI | NULL    |       |
+| nama  | varchar(50) | NO   |     | NULL    |       |
+| hobby | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+ alter table mhs add hobi varchar(20)not null;
+Query OK, 4 rows affected (0.14 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc mhs;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| nim   | int(12)     | NO   | PRI | NULL    |       |
+| nama  | varchar(50) | NO   |     | NULL    |       |
+| hobby | varchar(50) | YES  |     | NULL    |       |
+| hobi  | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+mysql> update mhs set hobi = 'tidur' where nim = '2016230041';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from mhs;
++------------+-------------------+----------+
+| nim        | nama              | hobi     |
++------------+-------------------+----------+
+| 2016230028 | ANGGINI EKA PUTRI | baca     |
+| 2016230037 | ARI RAMADHANI     | olahraga |
+| 2016230041 | DENI SAPUTRA      | tidur    |
++------------+-------------------+----------+
+3 rows in set (0.00 sec)
+
+
+mysql> use tif_pagi_a;
+Database changed
+mysql> create table Buku (id_buku int(20)not null, judul_buku varchar(50)not null);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc Buku;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id_buku    | int(20)     | NO   |     | NULL    |       |
+| judul_buku | varchar(50) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.03 sec)
+
+mysql> alter tabel Buku add pengarang varchar(50)not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel Buku add pengarang varchar(50)not null' at line 1
+mysql> alter table Buku add pengarang varchar(20)not null;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Buku add penerbit varchar(50)not null;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Buku;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id_buku    | int(20)     | NO   |     | NULL    |       |
+| judul_buku | varchar(50) | NO   |     | NULL    |       |
+| pengarang  | varchar(20) | NO   |     | NULL    |       |
+| penerbit   | varchar(50) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+mysql> insert into Buku (id_buku,judul_buku,pengarang,penerbit) values ("001","Pemrograman Komputer","Kusbini","Erlangga");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Buku;
++---------+----------------------+-----------+----------+
+| id_buku | judul_buku           | pengarang | penerbit |
++---------+----------------------+-----------+----------+
+|       1 | Pemrograman Komputer | Kusbini   | Erlangga |
++---------+----------------------+-----------+----------+
+1 row in set (0.00 sec)
+
++------------+------------------------+-----------+-------+
+| NIM        | NAMA                   | TEMPAT    | NILAI |
++------------+------------------------+-----------+-------+
+| 2016230006 | BRIGITHA CHESYA        | INDONESIA | 80    |
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |
+| 2016230030 | NUGROHO ADI            | BEKASI    | 86    |
+| 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |
+| 2016230190 | REZANOVAN              | TAMBUN    | 70    |
++------------+------------------------+-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mahasiswa where nim!=016230190;
++------------+------------------------+-----------+-------+
+| NIM        | NAMA                   | TEMPAT    | NILAI |
++------------+------------------------+-----------+-------+
+| 2016230006 | BRIGITHA CHESYA        | INDONESIA | 80    |
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |
+| 2016230030 | NUGROHO ADI            | BEKASI    | 86    |
+| 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |
+| 2016230190 | REZANOVAN              | TAMBUN    | 70    |
++------------+------------------------+-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mahasiswa where nim!=2016230190;
++------------+------------------------+-----------+-------+
+| NIM        | NAMA                   | TEMPAT    | NILAI |
++------------+------------------------+-----------+-------+
+| 2016230006 | BRIGITHA CHESYA        | INDONESIA | 80    |
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |
+| 2016230030 | NUGROHO ADI            | BEKASI    | 86    |
+| 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |
++------------+------------------------+-----------+-------+
+4 rows in set (0.00 sec)
+mysql> select *from mahasiswa,pinjam where mahasiswa.nim=pinjam.nim;
++------------+------------------------+-----------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+| NIM        | NAMA                   | TEMPAT    | NILAI | id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda |
++------------+------------------------+-----------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+| 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |
+| 2016230190 | REZANOVAN              | TAMBUN    | 70    |            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 |
+| 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 |
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 |
+| 2016230030 | NUGROHO ADI            | BEKASI    | 86    |            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 |
++------------+------------------------+-----------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+5 rows in set (0.06 sec)
+
+mysql>mysql> select mahasiswa.nim,pinjam.lama_pinjam from mahasiswa,pinjam where mahasiswa.nim=pinjam.nim;
++------------+-------------+
+| nim        | lama_pinjam |
++------------+-------------+
+| 2016230037 |           4 |
+| 2016230190 |           5 |
+| 2016230006 |          12 |
+| 2016230020 |          10 |
+| 2016230030 |           8 |
++------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> select *from mahasiswa,buku,pinjam where mahasiswa.nim=pinjam.nim and pinjam.id_buku=buku.id_buku;
++------------+------------------------+-----------+-------+---------+---------------------+--------------+-------------+---------------+------------+---------+------------+-------------+------------------+-------+
+| NIM        | NAMA                   | TEMPAT    | NILAI | id_buku | judul_buku          | pengarang    | penerbit    | id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda |
++------------+------------------------+-----------+-------+---------+---------------------+--------------+-------------+---------------+------------+---------+------------+-------------+------------------+-------+
+| 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |       1 | KAMBING JANTAN      | RADITYA DIKA | GAGAS MEDIA |            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |
+| 2016230190 | REZANOVAN              | TAMBUN    | 70    |       2 | CINTA BRONTOSURUS   | RADITYA DIKA | GAGAS MEDIA |            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 |
+| 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |       3 | RADIKUS MAKAN KAKUS | RADITYA DIKA | GAGAS MEDIA |            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 |
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |       4 | MARMUT MERAH JAMBU  | RADITYA DIKA | GAGAS MEDIA |            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 |
+| 2016230030 | NUGROHO ADI            | BEKASI    | 86    |       5 | FOREVER ALONE       | BARO INDRA   | LOVEABLE    |            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 |
++------------+------------------------+-----------+-------+---------+---------------------+--------------+-------------+---------------+------------+---------+------------+-------------+------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql>mysql> select nama adggdas from mahasiswa;
++------------------------+
+| adggdas                |
++------------------------+
+| BRIGITHA CHESYA        |
+| KURNIAWAN DWI YULIANTO |
+| NUGROHO ADI            |
+| ARI RAMADHANI          |
+| REZANOVAN              |
++------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select lama_pinjam adggdas from pinjam;
++---------+
+| adggdas |
++---------+
+|       4 |
+|       5 |
+|      12 |
+|      10 |
+|       8 |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mahasiswa,pinjam where mahasiswa.nama="ari ramadhani" and pinjam.nim="2016230037";
++------------+---------------+--------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+| NIM        | NAMA          | TEMPAT | NILAI | id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda |
++------------+---------------+--------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+| 2016230037 | ARI RAMADHANI | CAKUNG | 91    |            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |
++------------+---------------+--------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+1 row in set (0.03 sec)
+
+
+INSERT INTO `tif_pagi_a`.`pinjam` (`id_peminjaman`, `nim`, `id_buku`, `tgl_pinjam`, `lama_pinjam`, `tgl_pengembalian`, `denda`) VALUES ('13', '201623006', '3', '2017-03-10', '12', '2017-03-20', '20000');
+Query OK, 1 row affected (0.05 sec)
+mysql> show tables;
++----------------------+
+| Tables_in_tif_pagi_a |
++----------------------+
+| buku                 |
+| mahasiswa            |
+| pinjam               |
++----------------------+
+3 rows in set (0.00 sec)select 
+select  mahasiswa.nim, mahasiswa.nama, buku.judul_buku, buku.pengarang, pinjam.tgl_pinjam, pinjam.tgl_pengembalian, pinjam.denda from mahasiswa, buku, pinjam where mahasiswa.nim=pinjam.nim and buku.id_buku=pinjam.id_buku;
++------------+------------------------+---------------------+--------------+------------+------------------+-------+
+| nim        | nama                   | judul_buku          | pengarang    | tgl_pinjam | tgl_pengembalian | denda |
++------------+------------------------+---------------------+--------------+------------+------------------+-------+
+| 2016230037 | ARI RAMADHANI          | KAMBING JANTAN      | RADITYA DIKA | 2017-03-07 | 2017-03-10       |  5000 |
+| 2016230190 | REZANOVAN              | CINTA BRONTOSURUS   | RADITYA DIKA | 2017-03-01 | 2017-03-04       | 10000 |
+| 2016230006 | BRIGITHA CHESYA        | RADIKUS MAKAN KAKUS | RADITYA DIKA | 2017-03-10 | 2017-03-20       | 20000 |
+| 2016230020 | KURNIAWAN DWI YULIANTO | MARMUT MERAH JAMBU  | RADITYA DIKA | 2017-03-05 | 2017-03-10       | 50000 |
+| 2016230030 | NUGROHO ADI            | FOREVER ALONE       | BARO INDRA   | 2017-03-20 | 2017-03-25       | 30000 |
++------------+------------------------+---------------------+--------------+------------+------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql>select mahasiswa.nim, buku.judul_buku, date_format(tgl_pinjam,'%W-%m-%y') as tgl_pinjam, date_format(tgl_pengembalian,'%W-%m-%y') as tgl_pengembalian from mahasiswa,buku,pinjam where mahasiswa.nim=pinjam.nim and buku.id_buku=pinjam.id_buku;
++------------+---------------------+-----------------+------------------+
+| nim        | judul_buku          | tgl_pinjam      | tgl_pengembalian |
++------------+---------------------+-----------------+------------------+
+| 2016230037 | KAMBING JANTAN      | Tuesday-03-17   | Friday-03-17     |
+| 2016230190 | CINTA BRONTOSURUS   | Wednesday-03-17 | Saturday-03-17   |
+| 2016230006 | RADIKUS MAKAN KAKUS | Friday-03-17    | Monday-03-17     |
+| 2016230020 | MARMUT MERAH JAMBU  | Sunday-03-17    | Friday-03-17     |
+| 2016230030 | FOREVER ALONE       | Monday-03-17    | Saturday-03-17   |
++------------+---------------------+-----------------+------------------+
+5 rows in set (0.06 sec)
+
+mysql>select mahasiswa.nim, mahasiswa.nama, buku.judul_buku,buku.pengarang, date_format(tgl_pinjam,'%W-%m-%y') as tgl_pinjam, date_format(tgl_pengembalian,'%W-%m-%y') as tgl_pengembalian,pinjam.denda from mahasiswa,buku,pinjam where mahasiswa.nim=pinjam.nim and buku.id_buku=pinjam.id_buku;
++------------+------------------------+---------------------+--------------+-----------------+------------------+-------+
+| nim        | nama                   | judul_buku          | pengarang    | tgl_pinjam      | tgl_pengembalian | denda |
++------------+------------------------+---------------------+--------------+-----------------+------------------+-------+
+| 2016230037 | ARI RAMADHANI          | KAMBING JANTAN      | RADITYA DIKA | Tuesday-03-17   | Friday-03-17     |  5000 |
+| 2016230190 | REZANOVAN              | CINTA BRONTOSURUS   | RADITYA DIKA | Wednesday-03-17 | Saturday-03-17   | 10000 |
+| 2016230006 | BRIGITHA CHESYA        | RADIKUS MAKAN KAKUS | RADITYA DIKA | Friday-03-17    | Monday-03-17     | 20000 |
+| 2016230020 | KURNIAWAN DWI YULIANTO | MARMUT MERAH JAMBU  | RADITYA DIKA | Sunday-03-17    | Friday-03-17     | 50000 |
+| 2016230030 | NUGROHO ADI            | FOREVER ALONE       | BARO INDRA   | Monday-03-17    | Saturday-03-17   | 30000 |
++------------+------------------------+---------------------+--------------+-----------------+------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql>select*from pinjam inner join mahasiswa on pinjam.nim=mahasiswa.nim;
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+
+| id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda | NIM        | NAMA                   | TEMPAT    | NILAI |
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+
+|            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 | 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |
+|            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 | 2016230190 | REZANOVAN              | TAMBUN    | 70    |
+|            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 | 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |
+|            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 | 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |
+|            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 | 2016230030 | NUGROHO ADI            | BEKASI    | 86    |
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+
+5 rows in set (0.13 sec)
+mysql> select*from mahasiswa left join pinjam on mahasiswa.nim=pinjam.nim;
++------------+------------------------+-----------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+| NIM        | NAMA                   | TEMPAT    | NILAI | id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda |
++------------+------------------------+-----------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+| 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |
+| 2016230190 | REZANOVAN              | TAMBUN    | 70    |            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 |
+| 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 |
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 |
+| 2016230030 | NUGROHO ADI            | BEKASI    | 86    |            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 |
++------------+------------------------+-----------+-------+---------------+------------+---------+------------+-------------+------------------+-------+
+5 rows in set (0.03 sec)
+
+mysql> select*from pinjam right join mahasiswa on pinjam.nim=mahasiswa.nim;
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+
+| id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda | NIM        | NAMA                   | TEMPAT    | NILAI |
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+
+|            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 | 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |
+|            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 | 2016230190 | REZANOVAN              | TAMBUN    | 70    |
+|            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 | 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |
+|            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 | 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |
+|            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 | 2016230030 | NUGROHO ADI            | BEKASI    | 86    |
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+
+5 rows in set (0.00 sec)
+mysql> select *from pinjam a left join buku b on a.id_buku=b.id_buku;
++---------------+------------+---------+------------+-------------+------------------+-------+---------+---------------------+--------------+-------------+
+| id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda | id_buku | judul_buku          | pengarang    | penerbit    |
++---------------+------------+---------+------------+-------------+------------------+-------+---------+---------------------+--------------+-------------+
+|            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |       1 | KAMBING JANTAN      | RADITYA DIKA | GAGAS MEDIA |
+|            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 |       2 | CINTA BRONTOSURUS   | RADITYA DIKA | GAGAS MEDIA |
+|            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 |       3 | RADIKUS MAKAN KAKUS | RADITYA DIKA | GAGAS MEDIA |
+|            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 |       4 | MARMUT MERAH JAMBU  | RADITYA DIKA | GAGAS MEDIA |
+|            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 |       5 | FOREVER ALONE       | BARO INDRA   | LOVEABLE    |
++---------------+------------+---------+------------+-------------+------------------+-------+---------+---------------------+--------------+-------------+
+5 rows in set (0.08 sec)
+mysql> select*from pinjam a
+    -> left join buku b on b.id_buku=a.id_buku
+    -> left join mahasiswa c on c.nim=a.nim;
++---------------+------------+---------+------------+-------------+------------------+-------+---------+---------------------+--------------+-------------+------------+------------------------+-----------+-------+
+| id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda | id_buku | judul_buku          | pengarang    | penerbit    | NIM        | NAMA                   | TEMPAT    | NILAI |
++---------------+------------+---------+------------+-------------+------------------+-------+---------+---------------------+--------------+-------------+------------+------------------------+-----------+-------+
+|            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |       1 | KAMBING JANTAN      | RADITYA DIKA | GAGAS MEDIA | 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |
+|            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 |       2 | CINTA BRONTOSURUS   | RADITYA DIKA | GAGAS MEDIA | 2016230190 | REZANOVAN              | TAMBUN    | 70    |
+|            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 |       3 | RADIKUS MAKAN KAKUS | RADITYA DIKA | GAGAS MEDIA | 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |
+|            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 |       4 | MARMUT MERAH JAMBU  | RADITYA DIKA | GAGAS MEDIA | 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |
+|            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 |       5 | FOREVER ALONE       | BARO INDRA   | LOVEABLE    | 2016230030 | NUGROHO ADI            | BEKASI    | 86    |
++---------------+------------+---------+------------+-------------+------------------+-------+---------+---------------------+--------------+-------------+------------+------------------------+-----------+-------+
+5 rows in set (0.03 sec)
+mysql> select*from mahasiswa;
++------------+------------------------+-----------+-------+
+| NIM        | NAMA                   | TEMPAT    | NILAI |
++------------+------------------------+-----------+-------+
+| 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |
+| 2016230030 | NUGROHO ADI            | BEKASI    | 86    |
+| 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |
+| 2016230190 | REZANOVAN              | TAMBUN    | 70    |
++------------+------------------------+-----------+-------+
+5 rows in set (0.00 sec)
+mysql> select max(nilai) from mahasiswa;
++------------+
+| max(nilai) |
++------------+
+| 91         |
++------------+
+1 row in set (0.05 sec)
+
+mysql> select min(nilai) from mahasiswa;
++------------+
+| min(nilai) |
++------------+
+| 60         |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(nilai) from mahasiswa;
++------------+
+| sum(nilai) |
++------------+
+|        388 |
++------------+
+1 row in set (0.52 sec)
+
+mysql> select avg(nilai) from mahasiswa;
++------------+
+| avg(nilai) |
++------------+
+|       77.6 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from mahasiswa;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+mysql> select user();
++----------------+
+| user()         |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select md5('admin');
++----------------------------------+
+| md5('admin')                     |
++----------------------------------+
+| 21232f297a57a5a743894a0e4a801fc3 |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select password('admin');
++-------------------------------------------+
+| password('admin')                         |
++-------------------------------------------+
+| *4ACFE3202A5FF5CF467898FC58AAB1D615029441 |
++-------------------------------------------+
+1 row in set (0.88 sec)
+
+mysql> select password('oasdsadsadasdsa');
++-------------------------------------------+
+| password('oasdsadsadasdsa')               |
++-------------------------------------------+
+| *DEF579492448F4F80C6A47E4B43E7C05A4B4F1D1 |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select md5('oasdsadsadasdsa');
++----------------------------------+
+| md5('oasdsadsadasdsa')           |
++----------------------------------+
+| b375e948b1b46376ebc258b15e3d3708 |
++----------------------------------+
+1 row in set (0.00 sec)
+ select *from pinjam group by id_buku;
++---------------+------------+---------+------------+-------------+------------------+-------+
+| id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda |
++---------------+------------+---------+------------+-------------+------------------+-------+
+|            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |
+|            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 |
+|            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 |
+|            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 |
+|            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 |
++---------------+------------+---------+------------+-------------+------------------+-------+
+5 rows in set (0.01 sec)
+ select *from buku group by penerbit;
++---------+----------------+--------------+-------------+
+| id_buku | judul_buku     | pengarang    | penerbit    |
++---------+----------------+--------------+-------------+
+|       1 | KAMBING JANTAN | RADITYA DIKA | GAGAS MEDIA |
+|       5 | FOREVER ALONE  | BARO INDRA   | LOVEABLE    |
++---------+----------------+--------------+-------------+
+2 rows in set (0.00 sec)
+mysql> select *,sum(lama_pinjam)as lama from pinjam group by id_buku;
++---------------+------------+---------+------------+-------------+------------------+-------+------+
+| id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda | lama |
++---------------+------------+---------+------------+-------------+------------------+-------+------+
+|            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 |    4 |
+|            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 |    5 |
+|            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 |   12 |
+|            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 |   10 |
+|            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 |    8 |
++---------------+------------+---------+------------+-------------+------------------+-------+------+
+5 rows in set (0.86 sec)
+mysql> select nim,id_buku,tgl_pinjam,tgl_pengembalian,denda,sum(lama_pinjam) as lama from pinjam group by lama_pinjam;
++------------+---------+------------+------------------+-------+------+
+| nim        | id_buku | tgl_pinjam | tgl_pengembalian | denda | lama |
++------------+---------+------------+------------------+-------+------+
+| 2016230037 |       1 | 2017-03-07 | 2017-03-10       |  5000 |    4 |
+| 2016230190 |       2 | 2017-03-01 | 2017-03-04       | 10000 |    5 |
+| 2016230030 |       5 | 2017-03-20 | 2017-03-25       | 30000 |    8 |
+| 2016230020 |       4 | 2017-03-05 | 2017-03-10       | 50000 |   10 |
+| 2016230006 |       3 | 2017-03-10 | 2017-03-20       | 20000 |   12 |
++------------+---------+------------+------------------+-------+------+
+5 rows in set (0.00 sec)
+mysql> select *,count(b.nim) as jum_mahasiswa from pinjam a inner join mahasiswa b on a.nim=b.nim group by id_buku;
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+---------------+
+| id_peminjaman | nim        | id_buku | tgl_pinjam | lama_pinjam | tgl_pengembalian | denda | NIM        | NAMA                   | TEMPAT    | NILAI | jum_mahasiswa |
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+---------------+
+|            11 | 2016230037 |       1 | 2017-03-07 |           4 | 2017-03-10       |  5000 | 2016230037 | ARI RAMADHANI          | CAKUNG    | 91    |             1 |
+|            12 | 2016230190 |       2 | 2017-03-01 |           5 | 2017-03-04       | 10000 | 2016230190 | REZANOVAN              | TAMBUN    | 70    |             1 |
+|            13 | 2016230006 |       3 | 2017-03-10 |          12 | 2017-03-20       | 20000 | 2016230006 | BRIGITHA CHESYA        | INDONESIA | 81    |             1 |
+|            14 | 2016230020 |       4 | 2017-03-05 |          10 | 2017-03-10       | 50000 | 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL     | 60    |             1 |
+|            15 | 2016230030 |       5 | 2017-03-20 |           8 | 2017-03-25       | 30000 | 2016230030 | NUGROHO ADI            | BEKASI    | 86    |             1 |
++---------------+------------+---------+------------+-------------+------------------+-------+------------+------------------------+-----------+-------+---------------+
+5 rows in set (0.05 sec)
+mysql> select a.id_buku, sum(a.denda) as denda, sum(a.lama_pinjam)as lama, count(b.nim)as jum_mahasiswa from pinjam a inner join mahasiswa b on a.nim=b.nim group by id_buku;
++---------+-------+------+---------------+
+| id_buku | denda | lama | jum_mahasiswa |
++---------+-------+------+---------------+
+|       1 |  5000 |    4 |             1 |
+|       2 | 10000 |    5 |             1 |
+|       3 | 20000 |   12 |             1 |
+|       4 | 50000 |   10 |             1 |
+|       5 | 30000 |    8 |             1 |
++---------+-------+------+---------------+
+5 rows in set (0.00 sec)
+mysql>  select b.nilai, a.id_buku, sum(a.denda) as denda, sum(a.lama_pinjam)as lama, count(b.nim)as jum_mahasiswa from pinjam a inner join mahasiswa b on a.nim=b.nim group by id_buku having nilai < 90;
++-------+---------+-------+------+---------------+
+| nilai | id_buku | denda | lama | jum_mahasiswa |
++-------+---------+-------+------+---------------+
+| 70    |       2 | 10000 |    5 |             1 |
+| 81    |       3 | 20000 |   12 |             1 |
+| 60    |       4 | 50000 |   10 |             1 |
+| 86    |       5 | 30000 |    8 |             1 |
++-------+---------+-------+------+---------------+
+4 rows in set (0.08 sec)
+ mysql>  select b.nama, count(a.id_buku) as jumlah_buku_yg_di_pinjam, sum(a.denda) as jumlah_denda from pinjam a inner join mahasiswa b on a.nim=b.nim group by id_buku;
++------------------------+--------------------------+--------------+
+| nama                   | jumlah_buku_yg_di_pinjam | jumlah_denda |
++------------------------+--------------------------+--------------+
+| ARI RAMADHANI          |                        3 |        30000 |
+| REZANOVAN              |                        1 |        10000 |
+| BRIGITHA CHESYA        |                        1 |        20000 |
+| KURNIAWAN DWI YULIANTO |                        1 |        50000 |
+| NUGROHO ADI            |                        1 |        30000 |
++------------------------+--------------------------+--------------+
+mysql> select buku.id_buku, buku.penerbit, count(pinjam.id_buku) as total_pinjam from pinjam inner join buku on pinjam.id_buku=buku.id_buku group by pinjam.id_buku;
++---------+-------------+--------------+
+| id_buku | penerbit    | total_pinjam |
++---------+-------------+--------------+
+|       1 | GAGAS MEDIA |            3 |
+|       2 | GAGAS MEDIA |            1 |
+|       3 | GAGAS MEDIA |            1 |
+|       4 | GAGAS MEDIA |            1 |
+|       5 | LOVEABLE    |            1 |
++---------+-------------+--------------+
+5 rows in set (0.06 sec)
+MariaDB [tif_pagi_a]> select sum(nilai) as totala_nilai from mahasiswa group by nilai;
++--------------+
+| totala_nilai |
++--------------+
+|           60 |
+|           70 |
+|           80 |
+|           81 |
+|           86 |
+|           91 |
++--------------+
+6 rows in set (0.06 sec)
+
+MariaDB [tif_pagi_a]> select sum(nilai) as totala_nilai from mahasiswa group by nim;
++--------------+
+| totala_nilai |
++--------------+
+|           81 |
+|           60 |
+|           80 |
+|           86 |
+|           91 |
+|           70 |
++--------------+
+6 rows in set (0.00 sec)
+MariaDB [tif_pagi_a]> select*from mahasiswa where nim between "2016230020" and "2016230030";
++------------+------------------------+--------+-------+
+| NIM        | NAMA                   | TEMPAT | NILAI |
++------------+------------------------+--------+-------+
+| 2016230020 | KURNIAWAN DWI YULIANTO | TEGAL  | 60    |
+| 2016230023 | ANJAS MAWI             | CAKUNG | 80    |
+| 2016230030 | NUGROHO ADI            | BEKASI | 86    |
++------------+------------------------+--------+-------+
+3 rows in set (0.01 sec)
+
+MariaDB [tif_pagi_a]> select*from mahasiswa where nilai between "70" and "80";
++------------+------------+--------+-------+
+| NIM        | NAMA       | TEMPAT | NILAI |
++------------+------------+--------+-------+
+| 2016230023 | ANJAS MAWI | CAKUNG | 80    |
+| 2016230190 | REZANOVAN  | TAMBUN | 70    |
++------------+------------+--------+-------+
+2 rows in set (0.01 sec)
+
+
+
+MariaDB [musholah]> show tables;
++--------------------+
+| Tables_in_musholah |
++--------------------+
+| anggota            |
+| pemasukan_kurban   |
+| pengeluaran_kurban |
+| users              |
++--------------------+
+4 rows in set (0.00 sec)
+
+ 3 table jadi 1 dengan id_anggota dari anggota
+MariaDB [musholah]> SELECT anggota.id_anggota, anggota.nama, SUM(pemasukan_kurban.uang) AS pemasukan, pengeluaran, SUM(pemasukan_kurban.uang)-pengeluaran AS jumlah FROM anggota LEFT JOIN pemasukan_kurban ON anggota.id_anggota=pemasukan_kurban.id_anggota LEFT JOIN (SELECT anggota.id_anggota, SUM(pengeluaran_kurban.uang) AS pengeluaran FROM anggota, pengeluaran_kurban WHERE anggota.id_anggota=pengeluaran_kurban.id_anggota GROUP BY pengeluaran_kurban.id_anggota ASC) AS peng ON anggota.id_anggota=peng.id_anggota GROUP BY anggota.id_anggota ASC;
++------------+--------------+-----------+-------------+--------+
+| id_anggota | nama         | pemasukan | pengeluaran | jumlah |
++------------+--------------+-----------+-------------+--------+
+| 181207     | lingkar      |  50340000 |    50149000 | 191000 |
+| 181208     | sekarang     |    360000 |       60000 | 300000 |
+| 190101     | uooo         |    190000 |       55000 | 135000 |
+| 190102     | juyu         |    174000 |       62000 | 112000 |
+| 190103     | zxvn         |         0 |           0 |      0 |
+| 190104     | rerwerwerwer |    370000 |       30000 | 340000 |
++------------+--------------+-----------+-------------+--------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+musholah 3tabel tapi yang tampil 2 table id_anggota dari tabel pemasukan_kurban
+	karena anggota belum tentu ikut nabung kurban
+
+MariaDB [musholah]> SELECT pemasukan_kurban.id_anggota, pemasukan_kurban.nama, SUM(pemasukan_kurban.uang) AS pemasukan, pengeluaran, SUM(pemasukan_kurban.uang)-pengeluaran AS jumlah FROM anggota LEFT JOIN pemasukan_kurban ON anggota.id_anggota=pemasukan_kurban.id_anggota LEFT JOIN (SELECT anggota.id_anggota, SUM(pengeluaran_kurban.uang) AS pengeluaran FROM anggota, pengeluaran_kurban WHERE anggota.id_anggota=pengeluaran_kurban.id_anggota GROUP BY pengeluaran_kurban.id_anggota ASC) AS peng ON anggota.id_anggota=peng.id_anggota where pemasukan_kurban.uang >0 GROUP BY pemasukan_kurban.id_anggota ASC;
++------------+--------------+-----------+-------------+--------+
+| id_anggota | nama         | pemasukan | pengeluaran | jumlah |
++------------+--------------+-----------+-------------+--------+
+|     181207 | lingkar      |  50340000 |    50149000 | 191000 |
+|     181208 | sekarang     |    360000 |       60000 | 300000 |
+|     190101 | uooo         |    190000 |       55000 | 135000 |
+|     190102 | juyu         |    174000 |       62000 | 112000 |
+|     190104 | rerwerwerwer |    370000 |       30000 | 340000 |
++------------+--------------+-----------+-------------+--------+
+5 rows in set (0.00 sec)
+
+3 tabel jadi 1 tapi belum ada jumlah
+MariaDB [musholah]> select anggota.id_anggota,anggota.nama,sum(pemasukan_kurban.uang)as pemasukan, pengeluaran  from anggota LEFT JOIN pemasukan_kurban ON anggota.id_anggota=pemasukan_kurban.id_anggota LEFT JOIN (select anggota.id_anggota,sum(pengeluaran_kurban.uang) as pengeluaran from anggota,pengeluaran_kurban where anggota.id_anggota=pengeluaran_kurban.id_anggota group by pengeluaran_kurban.id_anggota asc) as nah on anggota.id_anggota=nah.id_anggota group by anggota.id_anggota asc;
++------------+--------------+-----------+-------------+
+| id_anggota | nama         | pemasukan | pengeluaran |
++------------+--------------+-----------+-------------+
+| 181207     | lingkar      |  50340000 |    50149000 |
+| 181208     | sekarang     |    360000 |       60000 |
+| 190101     | uooo         |    190000 |       55000 |
+| 190102     | juyu         |    174000 |       62000 |
+| 190103     | zxvn         |         0 |           0 |
+| 190104     | rerwerwerwer |    370000 |       30000 |
++------------+--------------+-----------+-------------+
+6 rows in set (0.00 sec)

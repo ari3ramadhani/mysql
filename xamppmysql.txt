@@ -1,0 +1,51 @@
+cd..
+cd/
+cd xampp/mysql/bin
+mysql -u root
+create database tif_pagi_a;
+show databases;
+use tif_pagi_a;
+create table mahasiswa (nim int(12)not null, nama varchar(50)not null);
+desc mahasiswa;
+insert into mahasiswa (nim, nama) values ("2016230007", "vega humaira");
+select * from mahasiswa;
+create database contoh;
+drop database contoh;
+show tables;
+alter table mahasiswa rename to mhs;
+alter table mhs add alamat varchar(50)not null;
+alter table mhs add hobi varchar(50)not null;
+alter table mhs drop hobi;
+alter table mhs modify nim int(12)primary key;
+desc mhs;
+alter table mhs modify alamat text not null;
+delete from mhs where nim='2016230006';
+update mhs set alamat='london' where nim='2016230007';
+alter table mhs add nilai int(11)not null;
+update mhs set nilai='90' where nim='2016230007';
+select * from mhs where nilai>=88 and alamat='cibitung';
+select * from mhs where nilai>=88 && alamat='cibitung';
+select * from mhs where nilai>=88 or alamat='cibitung';
+select * from mhs where nilai>=88 || alamat='cibitung';
+select * from mhs where alamat!='cibitung';
+select * from mhs where nama LIKE 've%';
+select * from mhs where nama LIKE '%ga';
+select * from mhs where nama LIKE '%ai%';
+select * from mhs ORDER BY nilai;
+select * from mhs ORDER BY nilai ASC;
+select * from mhs ORDER BY nilai DSC;
+select * from mhs ORDER BY nim ASC;
+select * from mhs,peminjaman where mhs.nim=peminjaman.id_mhs;
+select * from mhs,buku,peminjaman where mhs.nim=peminjaman.id_mhs and buku.id_buku=peminjaman.id_buku;
+select * from mhs,buku,peminjaman where mhs.nim=peminjaman.id_mhs && buku.id_buku=peminjaman.id_buku;
+select mhs.nama, peminjaman.lama_pinjam from mhs,peminjaman where mhs.nim=peminjaman.id_mhs;
+select nama from mhs;
+select nama as nm from mhs;
+
+select date_format(now(), '%d %m %Y');
+select date_format(now(), '%d %m %Y') from peminjaman;
+select date_format(now(), '%d %m %Y') as tgl_pinjam from peminjaman;
+select date_format(now(), '%d %m %y') as tgl_pinjam from peminjaman;
+select date_format(now(), '%d %M %Y') as tgl_pinjam from peminjaman;
+select date_format(now(), '%W %M %Y') as tgl_pinjam from peminjaman;
+select date_format(now(), '%a %M %Y') as tgl_pinjam from peminjaman;
